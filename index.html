@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emplois du Temps</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Emplois du Temps</h1>
+        <!-- Sélecteur de semaine -->
+        <label for="semaine">Sélectionner une semaine :</label>
+        <input type="week" id="semaine" name="semaine" onchange="chargerEmploisDuTemps()">
+        <br><br>
+        <!-- Sélecteur de vue -->
+        <label for="vue">Afficher par :</label>
+        <select id="vue" name="vue" onchange="changerVue()">
+            <option value="liste">Liste</option>
+            <option value="semainier">Semainier</option>
+        </select>
+        <br><br>
+        <!-- Conteneur pour afficher les emplois du temps -->
+        <div id="emplois-du-temps">
+            <!-- Les emplois du temps seront chargés ici -->
+        </div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Custom JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
