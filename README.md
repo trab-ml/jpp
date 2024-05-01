@@ -15,11 +15,6 @@ Zend Engine v4.1.2, Copyright (c) Zend Technologies
 ```
 
 ```bash
-$ sqlite3 --version
-3.37.2 2022-01-06 13:25:41 872ba256cbf61d9290b571c0e6d82a20c224ca3ad82971edc46b29818d5dalt1
-```
-
-```bash
 $ ls
 doc  index.html  README.md  src
 $ cd src/sql
@@ -28,19 +23,24 @@ emploi_temps.db  schema.sql  select_from_all_tables.sql
 ```
 
 ```bash
-$ sqlite3 emploi_temps.db
-SQLite version 3.37.2 2022-01-06 13:25:41
-Enter ".help" for usage hints.
-sqlite> .tables
-departements      enseignants       promotions
-emplois_du_temps  matieres          salles
+$ sqlite3 --version
+3.37.2 2022-01-06 13:25:41 872ba256cbf61d9290b571c0e6d82a20c224ca3ad82971edc46b29818d5dalt1
 ```
 
 ```bash
-# One of the interesting outputs format is tabular one (box, markdown, table)
-# ex.: To display departements content as table
+$ sqlite3 planning.db
+SQLite version 3.37.2 2022-01-06 13:25:41
+Enter ".help" for usage hints.
+sqlite> .tables
+administratifs  departements    etudiants       promotions    
+crenaux         enseignants     matieres        salles  
+```
+
+```bash
+# One of the interesting outputs format is tabular one (box, markdown, table) 
+# ex.: To display administratifs table content in box format:
 sqlite> .mode table
-sqlite> select * from departements;
+sqlite> select * from administratifs;
 
 # Other interesting way to achieve things properly is reading from files
 .read select_from_all_tables.sql # current tables are empty!
@@ -48,12 +48,14 @@ sqlite> select * from departements;
 sqlite> .help # for more features
 ```
 
-<https://www.sqlite.org/quickstart.html>
 <https://www.sqlite.org/cli.html>
+<https://www.sqlite.org/quickstart.html>
 
 ### Database Modeling
 
-The current one (emploi_temps.db, schema.sql) is it convenient ?
+![Database Model](./doc/Modélisation.png)
+
+<https://lucid.app/lucidchart/6cb5e3f1-ccb9-4aab-b33b-4682874a91e5/edit?invitationId=inv_ead9aa35-d1f8-48c5-8bef-6e5fb3bc0276&page=0_0#>
 
 **_Get inspired_**
 
