@@ -32,17 +32,17 @@ $ sqlite3 emploi_temps.db
 SQLite version 3.37.2 2022-01-06 13:25:41
 Enter ".help" for usage hints.
 sqlite> .tables
-departements      enseignants       promotions      
-emplois_du_temps  matieres          salles 
+departements      enseignants       promotions
+emplois_du_temps  matieres          salles
 ```
 
 ```bash
-# One of the interesting outputs format is tabular one (box, markdown, table) 
+# One of the interesting outputs format is tabular one (box, markdown, table)
 # ex.: To display departements content as table
 sqlite> .mode table
 sqlite> select * from departements;
 
-# Other interesting way to achieve things properly is reading from files 
+# Other interesting way to achieve things properly is reading from files
 .read select_from_all_tables.sql # current tables are empty!
 
 sqlite> .help # for more features
@@ -55,6 +55,22 @@ sqlite> .help # for more features
 
 The current one (emploi_temps.db, schema.sql) is it convenient ?
 
-***Get inspired***
+**_Get inspired_**
 
 - <https://github.com/trab-ml/AMDB>
+
+### Project structure
+
+Web pages:
+
+1. Login page:
+   - dans cette page tout type d'utilisateur peut se connecter: admin, enseignant et etudiant
+2. Main page
+   - page pour consulter l'emploi du temps
+   - Etudiants:
+   - juste consultation de l'emploi du temps
+     Admin et Enseignants:
+   - suppression, ajout et modification de l'emploi du temps
+3. Admin Page:
+   - cette page est disponible juste aux admins
+   - permet de créer des comptes d'utilisateur

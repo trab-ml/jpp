@@ -1,0 +1,42 @@
+.container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-form {
+  height: 300px;
+  width: 400px;
+  display: flex;
+  background-color: coral;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+  padding-top: 20px;
+  border-radius: 30px;
+  gap: 10px;
+}
+
+.input-box {
+  width: 100%;
+  display: flex;
+  /* align-items: center; */
+  justify-content: center;
+  gap: 6px;
+}
+
+input {
+  padding: 10px;
+  border-radius: 10px;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overscroll-behavior: none;
+}

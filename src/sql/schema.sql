@@ -35,9 +35,9 @@ CREATE TABLE salles (
 CREATE TABLE emplois_du_temps (
     id INTEGER PRIMARY KEY,
     date DATE NOT NULL,
-    heure_debut TIME NOT NULL,
-    heure_fin TIME NOT NULL,
-    type TEXT NOT NULL,
+    debut TIME NOT NULL,
+    fin TIME NOT NULL,
+    type_c TEXT NOT NULL,
     matiere_id INTEGER,
     enseignant_id INTEGER,
     salle_id INTEGER,
