@@ -15,11 +15,13 @@ Zend Engine v4.1.2, Copyright (c) Zend Technologies
 ```
 
 ```bash
-$ ls
-doc  index.html  README.md  src
-$ cd src/sql
-/src/sql$ ls
-emploi_temps.db  schema.sql  select_from_all_tables.sql
+# To be enable writing on sqlite database file, with it's parent folders, they should have the necessary permission
+$ chmod 775 jpp
+/jpp$ chmod 775 src
+/jpp/src$ chmod 777 sqlite
+/jpp/src/sqlite$ chmod 777 planning.db
+
+# sudo chown -R john src # To recursively set john as owner of src folder
 ```
 
 ```bash
@@ -39,11 +41,11 @@ crenaux         enseignants     matieres        salles
 ```bash
 # One of the interesting outputs format is tabular one (box, markdown, table) 
 # ex.: To display administratifs table content in box format:
-sqlite> .mode table
+sqlite> .mode box
 sqlite> select * from administratifs;
 
 # Other interesting way to achieve things properly is reading from files
-.read select_from_all_tables.sql # current tables are empty!
+.read select_from_all_tables.sql
 
 sqlite> .help # for more features
 ```
