@@ -78,3 +78,31 @@ Web pages:
 3. Admin Page:
    - cette page est disponible juste aux admins
    - permet de créer des comptes d'utilisateur
+
+### Sanitizing
+
+- `trim()` remove any leading or trailing whitespace
+
+- `htmlspecialchars()` prevent Cross-Site Scripting (XSS) attacks
+  - It converts special characters to their HTML entities. This means that characters which have special significance in HTML (like <, >, &, ", and ') are rendered as plain text, rather than being interpreted as HTML
+  - It prevents attackers from injecting malicious HTML and JS code into your page
+    - ex.: `<script>alert('XSS')</script>` would be rendered as `&lt;script&gt;alert('XSS')&lt;/script&gt;` (which would display as text rather than executing as JavaScript)
+
+- `bindParam()`, automatically escapes special characters to prevent SQL injection attacks
+  - Our code
+
+    ```php
+    $nom = trim(htmlspecialchars($_POST['nom']));
+    $sql = "SELECT * FROM administratifs WHERE nom = " . $nom;
+    ```
+
+  - User input
+
+    ```php
+    echo "<$nom>";
+    <''; DROP TABLE administratifs;'>
+    ```
+
+    Without any prevention, the bad user will delete `administratifs` table;
+
+<https://www.youtube.com/@dave-hollingworth/playlists>

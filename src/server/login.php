@@ -12,7 +12,7 @@ if (
     $nom = trim(htmlspecialchars($_POST['nom']));
     $mot_de_passe = trim(htmlspecialchars($_POST['mot_de_passe']));
 
-    $stmt->bindParam(':nom', $nom);
+    $stmt->bindParam(':nom', $nom, SQLITE3_TEXT);
 
     $result = $stmt->execute();
 
@@ -25,7 +25,6 @@ if (
 
     if ($user && password_verify($mot_de_passe, $user['mot_de_passe'])) {
         $_SESSION['nom'] = $nom;
-        $_SESSION['mot_de_passe'] = $mot_de_passe;
         $db->close();
         header("Location: home.php");
         exit;
