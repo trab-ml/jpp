@@ -1,21 +1,18 @@
 <?php
 session_start();
-require_once "./database.php";
+require_once "./config_database.php";
 
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST' 
-    && isset($_POST['nom']) && !empty($_POST['nom']) 
-    && isset($_POST['mot_de_passe']) && !empty($_POST['mot_de_passe'])) {
+if (
+    $_SERVER['REQUEST_METHOD'] === 'POST'
+    && isset($_POST['nom']) && !empty($_POST['nom'])
+    && isset($_POST['mot_de_passe']) && !empty($_POST['mot_de_passe'])
+) {
     $stmt = $db->prepare("SELECT * FROM administratifs WHERE nom = :nom");
 
     $nom = trim(htmlspecialchars($_POST['nom']));
     $mot_de_passe = trim(htmlspecialchars($_POST['mot_de_passe']));
 
     $stmt->bindParam(':nom', $nom);
-
-    echo "Before exec <br>";
-    echo "nom --> $nom <br>";
-    echo "mot_de_passe --> $mot_de_passe";
 
     $result = $stmt->execute();
 
@@ -37,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'
         $db->close();
     }
 } else {
-    header("Location: ../html/LoginPage.html");
+    header("Location: ../../index.html");
     exit;
 }
 ?>

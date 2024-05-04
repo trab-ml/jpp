@@ -1,5 +1,5 @@
 <?php
-require_once "./database.php";
+require_once "./config_database.php";
 
 $sql = 'INSERT INTO administratifs(nom, mot_de_passe, date_creation) VALUES (:nom, :mot_de_passe, :date_creation)';
 $stmt = $db->prepare($sql);
@@ -19,9 +19,9 @@ foreach ($users as $user) {
     $result = $stmt->execute();
 
     if (!$result) {
-        echo "Error inserting record for user: " . $user['nom'] . ": " . $db->lastErrorMsg() . "<br>";
+        echo "Erreur lors de l'insertion de l'utilisateur: " . $user['nom'] . "<br>" . $db->lastErrorMsg() . "<br><br>";
     } else {
-        echo "Record inserted successfully for user: " . $user['nom'] . "<br>";
+        echo "Compte utilisateur, " . $user['nom'] . ", créé avec succès.<br>";
     }
 }
 
