@@ -15,11 +15,13 @@ Zend Engine v4.1.2, Copyright (c) Zend Technologies
 ```
 
 ```bash
-$ ls
-doc  index.html  README.md  src
-$ cd src/sql
-/src/sql$ ls
-emploi_temps.db  schema.sql  select_from_all_tables.sql
+# To be enable writing on sqlite database file, with it's parent folders, they should have the necessary permission
+$ chmod 775 jpp
+/jpp$ chmod 775 src
+/jpp/src$ chmod 777 sqlite
+/jpp/src/sqlite$ chmod 777 planning.db
+
+# sudo chown -R john src # To recursively set john as owner of src folder
 ```
 
 ```bash
@@ -39,11 +41,11 @@ crenaux         enseignants     matieres        salles
 ```bash
 # One of the interesting outputs format is tabular one (box, markdown, table) 
 # ex.: To display administratifs table content in box format:
-sqlite> .mode table
+sqlite> .mode box
 sqlite> select * from administratifs;
 
 # Other interesting way to achieve things properly is reading from files
-.read select_from_all_tables.sql # current tables are empty!
+.read select_from_all_tables.sql
 
 sqlite> .help # for more features
 ```
@@ -76,3 +78,31 @@ Web pages:
 3. Admin Page:
    - cette page est disponible juste aux admins
    - permet de créer des comptes d'utilisateur
+
+### Sanitizing
+
+- `trim()` remove any leading or trailing whitespace
+
+- `htmlspecialchars()` prevent Cross-Site Scripting (XSS) attacks
+  - It converts special characters to their HTML entities. This means that characters which have special significance in HTML (like <, >, &, ", and ') are rendered as plain text, rather than being interpreted as HTML
+  - It prevents attackers from injecting malicious HTML and JS code into your page
+    - ex.: `<script>alert('XSS')</script>` would be rendered as `&lt;script&gt;alert('XSS')&lt;/script&gt;` (which would display as text rather than executing as JavaScript)
+
+- `bindParam()`, automatically escapes special characters to prevent SQL injection attacks
+  - Our code
+
+    ```php
+    $nom = trim(htmlspecialchars($_POST['nom']));
+    $sql = "SELECT * FROM administratifs WHERE nom = " . $nom;
+    ```
+
+  - User input
+
+    ```php
+    echo "<$nom>";
+    <''; DROP TABLE administratifs;'>
+    ```
+
+    Without any prevention, the bad user will delete `administratifs` table;
+
+<https://www.youtube.com/@dave-hollingworth/playlists>

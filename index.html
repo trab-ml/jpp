@@ -1,37 +1,24 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Emplois du Temps</title>
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Connexion</title>
+    <link rel="stylesheet" href="./src/style/loginPageStyle.css" />
+  </head>
+  <body>
     <div class="container">
-        <h1>Emplois du Temps</h1>
-        <!-- Sélecteur de semaine -->
-        <label for="semaine">Sélectionner une semaine :</label>
-        <input type="week" id="semaine" name="semaine" onchange="chargerEmploisDuTemps()">
-        <br><br>
-        <!-- Sélecteur de vue -->
-        <label for="vue">Afficher par :</label>
-        <select id="vue" name="vue" onchange="changerVue()">
-            <option value="liste">Liste</option>
-            <option value="semainier">Semainier</option>
-        </select>
-        <br><br>
-        <!-- Conteneur pour afficher les emplois du temps -->
-        <div id="emplois-du-temps">
-            <!-- Les emplois du temps seront chargés ici -->
+      <form action="./src/server/login.php" method="post" class="login-form">
+        <h1>Connexion</h1>
+        <div class="input-box">
+          <input type="text" id="nom" name="nom" placeholder="Nom d'utilisateur" />
         </div>
-    </div>
+        <div class="input-box">
+          <input type="password" id="mot_de_passe" name="mot_de_passe" placeholder="Mot de passe" />
+        </div>
 
-    <!-- jQuery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <!-- Custom JavaScript -->
-    <script src="script.js"></script>
-</body>
+        <button type="submit">Login</button>
+      </form>
+    </div>
+  </body>
 </html>

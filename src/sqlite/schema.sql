@@ -1,25 +1,31 @@
+PRAGMA foreign_key = on;
+
 CREATE TABLE administratifs (
     id_administratif INTEGER PRIMARY KEY AUTOINCREMENT,
     nom VARCHAR(30) NOT NULL,
     mot_de_passe VARCHAR(20) NOT NULL,
-    date_creation DATE NOT NULL
+    date_creation DATE NOT NULL,
+    UNIQUE (nom)
 );
 
 CREATE TABLE matieres (
     id_matiere INTEGER PRIMARY KEY AUTOINCREMENT,
-    nom VARCHAR(20) NOT NULL
+    nom VARCHAR(20) NOT NULL,
+    UNIQUE (nom)
 );
 
 CREATE TABLE enseignants (
     id_enseignant INTEGER PRIMARY KEY AUTOINCREMENT,
     nom VARCHAR(30) NOT NULL,
     mot_de_passe VARCHAR(20) NOT NULL,
-    date_creation DATE NOT NULL
+    date_creation DATE NOT NULL,
+    UNIQUE (nom)
 );
 
 CREATE TABLE salles (
     id_salle INTEGER PRIMARY KEY AUTOINCREMENT,
-    nom VARCHAR(20) NOT NULL
+    nom VARCHAR(20) NOT NULL,
+    UNIQUE (nom)
 );
 
 CREATE TABLE crenaux (
@@ -30,6 +36,7 @@ CREATE TABLE crenaux (
     heure_fin TIME,
     type VARCHAR(2) NOT NULL, -- CM | TD | TP
     date_creation Date NOT NULL,
+    PRIMARY KEY (id_matiere, id_enseignant, id_salle),
     FOREIGN KEY (id_matiere) REFERENCES matieres(id_matiere),
     FOREIGN KEY (id_enseignant) REFERENCES enseignants(id_enseignant),
     FOREIGN KEY (id_salle) REFERENCES salles(id_salle)
@@ -44,8 +51,13 @@ INSERT INTO EnumTable (value) VALUES ('MATH'), ('INFO'), ('SVT'), ('CHIMIE');
 
 CREATE TABLE departements (
     id_departement INTEGER PRIMARY KEY AUTOINCREMENT,
+<<<<<<< HEAD:src/sql/schema.sql
     nom INTEGER NOT NULL,
     FOREIGN KEY (nom) REFERENCES EnumTable(id)
+=======
+    nom VARCHAR(6) NOT NULL, -- MATH | INFO | SVT | CHIMIE
+    UNIQUE (nom)
+>>>>>>> deb474aec80c167b1d8c2ffaad01f26e1801cfb8:src/sqlite/schema.sql
 );
 
 CREATE TABLE promotions (
@@ -53,7 +65,8 @@ CREATE TABLE promotions (
     id_departement INTEGER,
     nom VARCHAR(50) NOT NULL,
     date_creation DATE NOT NULL,
-    FOREIGN KEY (id_departement) REFERENCES departements(id_departement)
+    FOREIGN KEY (id_departement) REFERENCES departements(id_departement),
+    UNIQUE (nom)
 );
 
 CREATE TABLE etudiants (
@@ -62,5 +75,6 @@ CREATE TABLE etudiants (
     nom VARCHAR(30) NOT NULL,
     mot_de_passe VARCHAR(20) NOT NULL,
     date_creation DATE NOT NULL,
-    FOREIGN KEY (id_promotion) REFERENCES promotions(id_promotion)
+    FOREIGN KEY (id_promotion) REFERENCES promotions(id_promotion),
+    UNIQUE (nom)
 );
