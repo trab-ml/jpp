@@ -19,6 +19,12 @@
   gap: 10px;
 }
 
+.submit-btn {
+  background-color: cornsilk;
+  padding: 5px;
+  border-radius: 5px;
+}
+
 .input-box {
   width: 100%;
   display: flex;

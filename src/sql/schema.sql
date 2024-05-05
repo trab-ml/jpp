@@ -35,9 +35,17 @@ CREATE TABLE crenaux (
     FOREIGN KEY (id_salle) REFERENCES salles(id_salle)
 );
 
+CREATE TABLE EnumTable (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    value VARCHAR(30) NOT NULL
+);
+
+INSERT INTO EnumTable (value) VALUES ('MATH'), ('INFO'), ('SVT'), ('CHIMIE');
+
 CREATE TABLE departements (
     id_departement INTEGER PRIMARY KEY AUTOINCREMENT,
-    nom VARCHAR(6) NOT NULL -- MATH | INFO | SVT | CHIMIE
+    nom INTEGER NOT NULL,
+    FOREIGN KEY (nom) REFERENCES EnumTable(id)
 );
 
 CREATE TABLE promotions (
