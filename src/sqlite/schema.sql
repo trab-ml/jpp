@@ -32,10 +32,10 @@ CREATE TABLE crenaux (
     id_matiere INTEGER,
     id_enseignant INTEGER,
     id_salle INTEGER,
-    heure_debut TIME,
-    heure_fin TIME,
-    type VARCHAR(2) NOT NULL, -- CM | TD | TP
-    date_creation Date NOT NULL,
+    heure_debut TIME not null,
+    heure_fin TIME not null,
+    type_cours VARCHAR(2) NOT NULL, -- CM | TD | TP
+    date_cours DATE NOT NULL,
     PRIMARY KEY (id_matiere, id_enseignant, id_salle),
     FOREIGN KEY (id_matiere) REFERENCES matieres(id_matiere),
     FOREIGN KEY (id_enseignant) REFERENCES enseignants(id_enseignant),
@@ -51,13 +51,8 @@ INSERT INTO EnumTable (value) VALUES ('MATH'), ('INFO'), ('SVT'), ('CHIMIE');
 
 CREATE TABLE departements (
     id_departement INTEGER PRIMARY KEY AUTOINCREMENT,
-<<<<<<< HEAD:src/sql/schema.sql
     nom INTEGER NOT NULL,
     FOREIGN KEY (nom) REFERENCES EnumTable(id)
-=======
-    nom VARCHAR(6) NOT NULL, -- MATH | INFO | SVT | CHIMIE
-    UNIQUE (nom)
->>>>>>> deb474aec80c167b1d8c2ffaad01f26e1801cfb8:src/sqlite/schema.sql
 );
 
 CREATE TABLE promotions (

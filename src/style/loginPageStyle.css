@@ -28,12 +28,11 @@
 .input-box {
   width: 100%;
   display: flex;
-  /* align-items: center; */
   justify-content: center;
   gap: 6px;
 }
 
-input {
+.input-radio-btns {
   padding: 10px;
   border-radius: 10px;
 }

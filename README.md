@@ -34,12 +34,12 @@ $ sqlite3 planning.db
 SQLite version 3.37.2 2022-01-06 13:25:41
 Enter ".help" for usage hints.
 sqlite> .tables
-administratifs  departements    etudiants       promotions    
-crenaux         enseignants     matieres        salles  
+administratifs  departements    etudiants       promotions
+crenaux         enseignants     matieres        salles
 ```
 
 ```bash
-# One of the interesting outputs format is tabular one (box, markdown, table) 
+# One of the interesting outputs format is tabular one (box, markdown, table)
 # ex.: To display administratifs table content in box format:
 sqlite> .mode box
 sqlite> select * from administratifs;
@@ -84,11 +84,13 @@ Web pages:
 - `trim()` remove any leading or trailing whitespace
 
 - `htmlspecialchars()` prevent Cross-Site Scripting (XSS) attacks
+
   - It converts special characters to their HTML entities. This means that characters which have special significance in HTML (like <, >, &, ", and ') are rendered as plain text, rather than being interpreted as HTML
   - It prevents attackers from injecting malicious HTML and JS code into your page
     - ex.: `<script>alert('XSS')</script>` would be rendered as `&lt;script&gt;alert('XSS')&lt;/script&gt;` (which would display as text rather than executing as JavaScript)
 
 - `bindParam()`, automatically escapes special characters to prevent SQL injection attacks
+
   - Our code
 
     ```php
@@ -106,3 +108,5 @@ Web pages:
     Without any prevention, the bad user will delete `administratifs` table;
 
 <https://www.youtube.com/@dave-hollingworth/playlists>
+
+J'ai besoin de faire une requete

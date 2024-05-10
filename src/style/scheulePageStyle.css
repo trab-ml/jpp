@@ -1,0 +1,90 @@
+/* *,
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+} */
+
+:root {
+  --numDays: 5;
+  --numHours: 10;
+  --timeHeight: 60px;
+  --calBgColor: #fff1f8;
+  --eventBorderColor: #f2d3d8;
+  --eventColor1: #ffd6d1;
+  --eventColor2: #fafaa3;
+  --eventColor3: #e2f8ff;
+  --eventColor4: #d1ffe6;
+}
+
+.calendar {
+  display: flex;
+  gap: 10px;
+  margin: 2rem;
+  /* background: red; */
+}
+
+.timeline {
+  margin-top: 50px;
+  margin-bottom: 5px;
+  display: flex;
+  flex-direction: column;
+}
+.time-marker {
+  height: 60px;
+  /* background: #e2f8ff; */
+}
+
+.days {
+  display: flex;
+  gap: 5px;
+}
+
+.day {
+  background: var(--calBgColor);
+  height: 710px;
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.week-day {
+  height: 50px;
+  border-bottom: 1px solid white;
+}
+
+.event {
+  border: 1px solid var(--eventBorderColor);
+  border-radius: 5px;
+  padding: 2px;
+  background: var(--eventColor2);
+  width: 90%;
+  left: 5px;
+  position: absolute;
+  font-size: small;
+}
+
+.profile {
+  width: 150px;
+  margin-right: 50px;
+  background: #e2f8ff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 5px;
+}
+
+.space,
+.date {
+  height: 60px;
+}
+
+body {
+  font-family: system-ui, sans-serif;
+}
+
+.date {
+  display: flex;
+  gap: 1em;
+}
