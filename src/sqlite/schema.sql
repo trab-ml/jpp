@@ -4,72 +4,64 @@ CREATE TABLE administratifs (
     id_administratif INTEGER PRIMARY KEY AUTOINCREMENT,
     nom VARCHAR(30) NOT NULL,
     mot_de_passe VARCHAR(20) NOT NULL,
-    date_creation DATE NOT NULL,
+    date_inscription DATE NOT NULL,
     UNIQUE (nom)
 );
 
 CREATE TABLE matieres (
-    id_matiere INTEGER PRIMARY KEY AUTOINCREMENT,
-    nom VARCHAR(20) NOT NULL,
-    UNIQUE (nom)
+    nom VARCHAR(20) PRIMARY KEY
 );
+INSERT INTO matieres(nom) VALUES ('Prog Web'), ('POO'), ('COO'), ('Anglais'), ('Chimie'), ('Géologie');
 
 CREATE TABLE enseignants (
     id_enseignant INTEGER PRIMARY KEY AUTOINCREMENT,
     nom VARCHAR(30) NOT NULL,
     mot_de_passe VARCHAR(20) NOT NULL,
-    date_creation DATE NOT NULL,
+    date_inscription DATE NOT NULL,
     UNIQUE (nom)
 );
 
 CREATE TABLE salles (
-    id_salle INTEGER PRIMARY KEY AUTOINCREMENT,
-    nom VARCHAR(20) NOT NULL,
-    UNIQUE (nom)
+    nom VARCHAR(20) PRIMARY KEY
 );
-
-CREATE TABLE crenaux (
-    id_matiere INTEGER,
-    id_enseignant INTEGER,
-    id_salle INTEGER,
-    heure_debut TIME not null,
-    heure_fin TIME not null,
-    type_cours VARCHAR(2) NOT NULL, -- CM | TD | TP
-    date_cours DATE NOT NULL,
-    PRIMARY KEY (id_matiere, id_enseignant, id_salle),
-    FOREIGN KEY (id_matiere) REFERENCES matieres(id_matiere),
-    FOREIGN KEY (id_enseignant) REFERENCES enseignants(id_enseignant),
-    FOREIGN KEY (id_salle) REFERENCES salles(id_salle)
-);
-
-CREATE TABLE EnumTable (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    value VARCHAR(30) NOT NULL
-);
-
-INSERT INTO EnumTable (value) VALUES ('MATH'), ('INFO'), ('SVT'), ('CHIMIE');
+INSERT INTO salles(nom) VALUES ('S16'), ('P1OO'), ('S23'), ('G007'), ('G309'), ('E7');
 
 CREATE TABLE departements (
-    id_departement INTEGER PRIMARY KEY AUTOINCREMENT,
-    nom INTEGER NOT NULL,
-    FOREIGN KEY (nom) REFERENCES EnumTable(id)
+    nom VARCHAR(6) PRIMARY KEY
 );
+INSERT INTO departements (nom) VALUES ('MATH'), ('INFO'), ('SVT'), ('CHIMIE');
 
 CREATE TABLE promotions (
-    id_promotion INTEGER PRIMARY KEY AUTOINCREMENT,
-    id_departement INTEGER,
-    nom VARCHAR(50) NOT NULL,
-    date_creation DATE NOT NULL,
-    FOREIGN KEY (id_departement) REFERENCES departements(id_departement),
-    UNIQUE (nom)
+    nom VARCHAR(50) PRIMARY KEY
 );
+INSERT INTO promotions (nom) VALUES ('Promo L3 MATH 2024'), ('Promo L3 INFO 2024'), ('Promo L3 SVT 2024'), ('Promo L3 CHIMIE 2024');
 
 CREATE TABLE etudiants (
     id_etudiant INTEGER PRIMARY KEY AUTOINCREMENT,
-    id_promotion INTEGER,
     nom VARCHAR(30) NOT NULL,
+    promotion VARCHAR,
+    departement VARCHAR,
     mot_de_passe VARCHAR(20) NOT NULL,
-    date_creation DATE NOT NULL,
-    FOREIGN KEY (id_promotion) REFERENCES promotions(id_promotion),
+    date_inscription DATE NOT NULL,
+    FOREIGN KEY (promotion) REFERENCES promotions(nom),
+    FOREIGN KEY (departement) REFERENCES departements(nom),
     UNIQUE (nom)
+);
+
+CREATE TABLE creneaux (
+    id_creneau INTEGER PRIMARY KEY AUTOINCREMENT,
+    matiere VARCHAR,
+    enseignant VARCHAR,
+    salle VARCHAR,
+    promotion VARCHAR,
+    departement VARCHAR,
+    heure_debut TIME NOT NULL,
+    heure_fin TIME NOT NULL,
+    date_cours DATE NOT NULL,
+    type_cours VARCHAR(2) CHECK(type_cours IN ('CM', 'TD', 'TP')),
+    FOREIGN KEY (matiere) REFERENCES matieres(matiere),
+    FOREIGN KEY (enseignant) REFERENCES enseignants(nom),
+    FOREIGN KEY (salle) REFERENCES salles(nom),
+    FOREIGN KEY (promotion) REFERENCES promotions(nom),
+    FOREIGN KEY (departement) REFERENCES departements(nom)
 );
