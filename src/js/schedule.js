@@ -1,4 +1,4 @@
-$(document).ready(() => {
+$(document).ready(() => {  
   // the first week that we are going to get is the current week
   ({ startOfWeek, endOfWeek } = getWeekDetails());
   console.log("Start of week: " + startOfWeek);
@@ -8,34 +8,34 @@ $(document).ready(() => {
 
   // i created this mock result to facilitate the demonstration
 
-  $(".profile").append(
-    `<div class="profile-info">
-          <p>${profile.nom} ${profile.prenom}</p>
-          <p>${profile.statut}</p>
-      </div>`
-  );
+  // $(".profile").append(
+  //   `<div class="profile-info">
+  //         <p>${profile.nom} ${profile.prenom}</p>
+  //         <p>${profile.statut}</p>
+  //     </div>`
+  // );
 
   creneaux.map((creneau) => {
-    let dayOfWeek = new Date(creneau.date).getDay();
+    let dayOfWeek = new Date(creneau.date_cours).getDay();
 
     console.log("Day of the week" + dayOfWeek);
 
     let titleSpace = 50;
 
     let creneauMinutes =
-      parseInt(creneau.debut.split(":")[1]) +
-      (parseInt(creneau.debut.split(":")[0]) - 8) * 60;
+      parseInt(creneau.heure_debut.split(":")[1]) +
+      (parseInt(creneau.heure_debut.split(":")[0]) - 8) * 60;
 
     let marginTop = creneauMinutes + titleSpace;
 
     let height =
-      parseInt(creneau.fin.split(":")[1]) +
-      (parseInt(creneau.fin.split(":")[0]) - 8) * 60 -
+      parseInt(creneau.heure_fin.split(":")[1]) +
+      (parseInt(creneau.heure_fin.split(":")[0]) - 8) * 60 -
       creneauMinutes;
 
     $(`#day-${dayOfWeek}`).append(
       `<div class="event" style="margin-top:${marginTop}px; height:${height}px; ">
-        <strong>${creneau.nom_matiere} - ${creneau.type_cours}</strong>
+        <strong>${creneau.matiere} - ${creneau.type_cours}</strong>
         <br>
         ${creneau.salle}
         <br>

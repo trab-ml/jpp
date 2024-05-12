@@ -35,7 +35,7 @@ SQLite version 3.37.2 2022-01-06 13:25:41
 Enter ".help" for usage hints.
 sqlite> .tables
 administratifs  departements    etudiants       promotions
-crenaux         enseignants     matieres        salles
+creneaux         enseignants     matieres        salles
 ```
 
 ```bash
@@ -107,6 +107,37 @@ Web pages:
 
     Without any prevention, the bad user will delete `administratifs` table;
 
-<https://www.youtube.com/@dave-hollingworth/playlists>
+- <https://www.youtube.com/@dave-hollingworth/playlists>
 
-J'ai besoin de faire une requete
+### Fetching creneaux data
+
+When logged in, the user will be redirected on `home.php`, which includes `constants.js` and `schedule.js`.
+`constants.js` fetch data from database and will get data in following format:
+
+```json
+fetch response format
+creneaux = [
+  {
+    date_cours: "2024-05-13",
+    departement: "INFO",
+    enseignant: "Bob Dupont",
+    heure_debut: "8:15",
+    heure_fin: "10:15",
+    matiere: "POO",
+    promotion: "Promo L3 INFO 2024",
+    salle: "S16",
+    type_cours: "CM",
+  },
+];
+```
+
+Given that profile infos are available in session vars, they are directly displayed by home.php.
+
+### TODO
+
+- Tenir compte des contraintes lors de linsertion via php
+  - 2 cours ne peuvent avoir lieux en même temps lorsqu'il s'agit
+    - du même prof
+    - de la même matière avec différents prof
+    - ds la même salle
+- Some errors occured while displaying using `schedule.js`
