@@ -1,72 +1,75 @@
-$(document).ready(() => {  
-  // the first week that we are going to get is the current week
-  ({ startOfWeek, endOfWeek } = getWeekDetails());
-  console.log("Start of week: " + startOfWeek);
-  console.log("End of week: " + endOfWeek);
+$(document).ready(async () => {
+  const url = 'http://localhost/dev/jpp/src/server/fetch_creneaux_data.php';
+  const params = {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
 
-  // make sql query to retrieve all creneaux between startofweek and endofweek
+  try {
+    const response = await fetch(url, params);
+    console.log(response);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const creneaux = await response.json();
+    if (!creneaux) {
+      throw new Error('creneaux is not defined');
+    }
+    console.log(`Les créneaux: ${creneaux}`);
 
-  // i created this mock result to facilitate the demonstration
+    const { startOfWeek, endOfWeek } = getWeekDetails();
+    console.log(`Start of week: ${startOfWeek}`);
+    console.log(`End of week: ${endOfWeek}`);
 
-  // $(".profile").append(
-  //   `<div class="profile-info">
-  //         <p>${profile.nom} ${profile.prenom}</p>
-  //         <p>${profile.statut}</p>
-  //     </div>`
-  // );
+    creneaux.map((creneau) => {
+      const dayOfWeek = new Date(creneau.date_cours).getDay();
+      console.log(`Day of the week: ${dayOfWeek}`);
 
-  creneaux.map((creneau) => {
-    let dayOfWeek = new Date(creneau.date_cours).getDay();
+      const titleSpace = 50;
 
-    console.log("Day of the week" + dayOfWeek);
+      const [startHour, startMinute] = creneau.heure_debut.split(":").map(Number);
+      const creneauMinutes = startMinute + (startHour - 8) * 60;
 
-    let titleSpace = 50;
+      const marginTop = creneauMinutes + titleSpace;
 
-    let creneauMinutes =
-      parseInt(creneau.heure_debut.split(":")[1]) +
-      (parseInt(creneau.heure_debut.split(":")[0]) - 8) * 60;
+      const [endHour, endMinute] = creneau.heure_fin.split(":").map(Number);
+      const height = endMinute + (endHour - 8) * 60 - creneauMinutes;
 
-    let marginTop = creneauMinutes + titleSpace;
-
-    let height =
-      parseInt(creneau.heure_fin.split(":")[1]) +
-      (parseInt(creneau.heure_fin.split(":")[0]) - 8) * 60 -
-      creneauMinutes;
-
-    $(`#day-${dayOfWeek}`).append(
-      `<div class="event" style="margin-top:${marginTop}px; height:${height}px; ">
-        <strong>${creneau.matiere} - ${creneau.type_cours}</strong>
-        <br>
-        ${creneau.salle}
-        <br>
-        ${creneau.enseignant}
-        </div>`
-    );
-  });
+      $(`#day-${dayOfWeek}`).append(
+        `<div class="event" style="margin-top:${marginTop}px; height:${height}px; ">
+          <strong>${creneau.matiere} - ${creneau.type_cours}</strong>
+          <br>
+          ${creneau.salle}
+          <br>
+          ${creneau.enseignant}
+          </div>`
+      );
+    });
+  } catch (error) {
+    console.error('Fetch error:', error);
+  }
 });
 
 function formatDate(date) {
-  var year = date.getFullYear();
-  var month = date.getMonth() + 1; // getMonth() returns 0-11, so we need to add 1
-  var day = date.getDate();
+  const year = date.getFullYear();
+  const month = (date.getMonth() + 1).toString().padStart(2, '0');
+  const day = date.getDate().toString().padStart(2, '0');
 
-  // Pad month and day with leading zeros if necessary
-  if (month < 10) month = "0" + month;
-  if (day < 10) day = "0" + day;
-
-  return year + "-" + month + "-" + day;
+  return `${year}-${month}-${day}`;
 }
 
 function getWeekDetails() {
-  var now = new Date();
-  var dayOfWeek = now.getDay(); // 0-6 where 0 is Sunday
-  var numDay = now.getDate();
+  const now = new Date();
+  const dayOfWeek = now.getDay();
+  const numDay = now.getDate();
 
-  var startOfWeek = new Date(now); // Start of week as Monday
-  startOfWeek.setDate(numDay - dayOfWeek + (dayOfWeek === 0 ? -6 : 1)); // Adjust to previous Monday
+  const startOfWeek = new Date(now);
+  startOfWeek.setDate(numDay - dayOfWeek + (dayOfWeek === 0 ? -6 : 1));
 
-  var endOfWeek = new Date(now); // End of week as Friday
-  endOfWeek.setDate(numDay + (5 - dayOfWeek + (dayOfWeek === 0 ? 6 : 0))); // Adjust to next Friday
+  const endOfWeek = new Date(now);
+  endOfWeek.setDate(numDay + (5 - dayOfWeek + (dayOfWeek === 0 ? 6 : 0)));
 
   return {
     startOfWeek: formatDate(startOfWeek),

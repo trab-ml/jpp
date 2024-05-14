@@ -13,8 +13,6 @@ require_once './check_auth.php';
     <!-- Custom CSS -->
     <link rel="stylesheet" href="../style/scheulePageStyle.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-    <script src="../mocks/constants.js"></script>
     <script src="../js/schedule.js"></script>
 </head>
 
@@ -61,5 +59,4 @@ require_once './check_auth.php';
         </div>
     </div>
 </body>
-
 </html>
