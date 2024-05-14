@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../style/dashboardStyle.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script src="../js/constants.js"></script>
+    <script src="../js/etudiantsContent.js"></script>
+    <script src="../js/creneauxContent.js"></script>
+    <script src="../js/dashboard.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Dashboard</h1>
+      <div class="dashboard">
+        <div class="menu">
+          <button type="button" id="btn-etudiant">Etudiants</button>
+          <button type="button" id="btn-enseignant">Enseignants</button>
+          <button type="button" id="btn-creneau">Creneaux</button>
+          <button type="button" id="btn-salle">Salles</button>
+        </div>
+        <div class="content"></div>
+      </div>
+    </div>
+  </body>
+</html>
