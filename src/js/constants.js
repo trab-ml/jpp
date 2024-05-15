@@ -1,24 +1,6 @@
-// const url = "../server/fetch_creneaux_data.php";
-// const params = {
-//   method: "GET",
-//   headers: {
-//     "Content-Type": "application/json",
-//   },
-// };
-// let creneaux;
-
-// console.log("We are here");
-
-// fetch(url, params)
-//   .then((response) => response.json())
-//   .then((data) => {
-//     console.log(data);
-//     creneaux = data;
-//   })
-//   .catch((error) => console.error("Fetch error:", error));
-
-creneaux = [
+const creneaux = [
   {
+    id: "1",
     matiere: "Calculus",
     salle: "Salle 104",
     enseignant: "Said Jabour",
@@ -28,6 +10,7 @@ creneaux = [
     date_cours: "2024-05-06",
   },
   {
+    id: "2",
     matiere: "Algebra",
     salle: "Salle 104",
     enseignant: "Said Jabour",
@@ -37,6 +20,7 @@ creneaux = [
     date_cours: "2024-05-07",
   },
   {
+    id: "3",
     matiere: "OOP",
     salle: "Salle 104",
     enseignant: "Said Jabour",
@@ -46,12 +30,6 @@ creneaux = [
     date_cours: "2024-05-06",
   },
 ];
-
-// const profile = {
-//   nom: "Johnny",
-//   prenom: "English",
-//   statut: "Etudiant",
-// };
 
 const etudiants = [
   {

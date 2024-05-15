@@ -1,8 +1,9 @@
 <?php
 session_start();
-
-error_reporting(E_ALL);
 ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 require_once 'config_database.php';
 
 $users = ["etudiant" => "etudiants", "enseignant" => "enseignants", "admin" => "administratifs"];
@@ -16,6 +17,9 @@ $data_cible = "creneaux.matiere AS matiere,
     creneaux.heure_fin AS heure_fin,
     creneaux.date_cours AS date_cours,
     creneaux.type_cours AS type_cours";
+
+// echo "nom = " . $_SESSION['nom'] . "<br>";
+// echo "table cible = $table_cible <br>";
 
 if ($table_cible === "etudiants") {
     $sql = "SELECT $data_cible
@@ -37,9 +41,12 @@ $stmt->bindParam(':nom', $_SESSION['nom'], PDO::PARAM_STR);
 
 $result = $stmt->execute();
 if (!$result) {
-    echo "Erreur lors de la requête<br>";
+    echo json_encode("Erreur lors de la requête");
     exit;
 }
+
+// echo "Résultat de la requête --> ";
+// print_r($result);
 
 $creneaux = [];
 while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
@@ -47,7 +54,7 @@ while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
 }
 
 if (!$creneaux) {
-    echo "Erreur lors de la lecture du résultat<br>";
+    echo json_encode("Erreur lors de la lecture du résultat");
     exit;
 }
 

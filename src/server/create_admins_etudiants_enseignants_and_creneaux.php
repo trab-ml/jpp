@@ -83,8 +83,6 @@ echo "<h1>Insertion creneaux...</h1>";
 $sql = 'INSERT INTO creneaux(matiere, enseignant, salle, promotion, heure_debut, heure_fin, date_cours, type_cours, departement) VALUES (:matiere, :enseignant, :salle, :promotion, :heure_debut, :heure_fin, :date_cours, :type_cours, :departement)';
 $stmt = $db->prepare($sql);
 
-// heure en sqlite3 https://www.sqlite.org/lang_datefunc.html
-
 $nextMonday = strtotime("next Monday");
 $nextMondayStr = date('Y-m-d', $nextMonday);
 

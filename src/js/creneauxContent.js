@@ -5,6 +5,7 @@ const createHtmlCreneaux = () => {
             <table class="content-table">
                 <thead>
                     <tr>
+                        <th>Id</th>
                         <th>Matiere</th>
                         <th>Salle</th>
                         <th>Enseignant</th>
@@ -24,6 +25,7 @@ const createHtmlCreneaux = () => {
   creneaux.map((creneau) => {
     $(".content-table tbody").append(`
             <tr>
+                <td>${creneau.id}</td>
                 <td>${creneau.matiere}</td>
                 <td>${creneau.salle}</td>
                 <td>${creneau.enseignant}</td>

@@ -1,5 +1,5 @@
 const createHtmlEtudiant = () => {
-  console.log("It was clicked");
+  console.log("It was clicked"); 
 
   $(".content").html(`
             <table class="content-table">

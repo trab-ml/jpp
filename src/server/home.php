@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once './check_auth.php';
 ?>
 
@@ -9,8 +10,6 @@ require_once './check_auth.php';
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Emploi du temps</title>
-
-    <!-- Custom CSS -->
     <link rel="stylesheet" href="../style/scheulePageStyle.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="../js/schedule.js"></script>
@@ -25,6 +24,7 @@ require_once './check_auth.php';
             <div class="profile-info">
                 <p> <?php echo $_SESSION['nom']; ?> </p>
                 <p> <?php echo $_SESSION['statut']; ?> </p>
+                <?php echo $_SESSION['statut'] == "admin" ? "<a href='./dashboard.php'>dashboard</a>" : "" ?>
             </div>
         </div>
         <div class="timeline">
