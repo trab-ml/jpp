@@ -139,4 +139,3 @@ Given that profile infos are available in session vars, they are directly displa
   - CR_D etudiants (etudiants.js) (Pascal Poireau pp24! math) (Jean Poivron jp23! info) (Pierre Desbois pd24* svt) (Jean Baptiste Perrin jbp70* svt)
   - **CR_D** creneaux
   - CR_D enseignants
-- Debugger fetch_creneaux_data.php (enseignants, etudiants)

@@ -18,9 +18,6 @@ $data_cible = "creneaux.matiere AS matiere,
     creneaux.date_cours AS date_cours,
     creneaux.type_cours AS type_cours";
 
-// echo "nom = " . $_SESSION['nom'] . "<br>";
-// echo "table cible = $table_cible <br>";
-
 if ($table_cible === "etudiants") {
     $sql = "SELECT $data_cible
     FROM etudiants
@@ -37,16 +34,13 @@ if ($table_cible === "etudiants") {
 }
 
 $stmt = $db->prepare($sql);
-$stmt->bindParam(':nom', $_SESSION['nom'], PDO::PARAM_STR);
+$stmt->bindParam(':nom', $_SESSION['nom']);
 
 $result = $stmt->execute();
 if (!$result) {
     echo json_encode("Erreur lors de la requête");
     exit;
 }
-
-// echo "Résultat de la requête --> ";
-// print_r($result);
 
 $creneaux = [];
 while ($row = $result->fetchArray(SQLITE3_ASSOC)) {

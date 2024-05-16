@@ -91,7 +91,6 @@ switch ($_SERVER['REQUEST_METHOD']) {
             || !isset($data['date_inscription']) || empty($data['date_inscription'])
         ) {
             throw new InvalidArgumentException('Invalid input data');
-            exit;
         }
 
         $nom = $data['nom'];
