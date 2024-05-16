@@ -1,6 +1,6 @@
 $(document).ready(async () => {
-  // const url = 'http://localhost/dev/jpp/src/server/fetch_creneaux_data.php';
-  const url = "http://localhost/jpp/src/server/fetch_creneaux_data.php";
+  const url = 'http://localhost/dev/jpp/src/server/fetch_creneaux_data.php';
+  // const url = "http://localhost/jpp/src/server/fetch_creneaux_data.php";
   const params = {
     method: "GET",
     headers: {

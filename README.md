@@ -4,6 +4,12 @@
 sudo /opt/lampp/manager-linux-x64.run
 ```
 
+[![Demo](doc/demo.gif)](demo.gif)
+
+- Do not hesitate to adapt the link according to your php setup.
+  - Such as my project folder is located in /opt/lampp/htdocs/dev. I can access to server/fetch_creneaux_data file using <http://localhost/dev/jpp/src/server/fetch_creneaux_data.php>
+  - Maybe yours will be <http://localhost/jpp/src/server/fetch_creneaux_data.php>
+
 ## Required Tech Stack and Config
 
 ```bash
