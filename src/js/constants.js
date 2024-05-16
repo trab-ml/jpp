@@ -63,3 +63,41 @@ const etudiants = [
     departement: "Chimie",
   },
 ];
+
+const enseignants = [
+  {
+    id_enseignant: "1",
+    nom: "Samuel Jackson",
+    date_inscription: "2024-05-06",
+  },
+  {
+    id_enseignant: "2",
+    nom: "Robert Downey Jr.",
+    date_inscription: "2023-04-07",
+  },
+  {
+    id_enseignant: "3",
+    nom: "Chris Evans",
+    date_inscription: "2022-03-08",
+  },
+  {
+    id_enseignant: "4",
+    nom: "Scarlett Johansson",
+    date_inscription: "2021-02-09",
+  },
+  {
+    id_enseignant: "5",
+    nom: "Chris Hemsworth",
+    date_inscription: "2020-01-10",
+  },
+  {
+    id_enseignant: "6",
+    nom: "Mark Ruffalo",
+    date_inscription: "2019-12-11",
+  },
+  {
+    id_enseignant: "7",
+    nom: "Jeremy Renner",
+    date_inscription: "2018-11-12",
+  },
+];

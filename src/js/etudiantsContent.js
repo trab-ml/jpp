@@ -1,5 +1,5 @@
 const createHtmlEtudiant = () => {
-  console.log("It was clicked"); 
+  console.log("It was clicked");
 
   $(".content").html(`
             <table class="content-table">
@@ -16,7 +16,6 @@ const createHtmlEtudiant = () => {
                 </tbody>
             </table>
         `);
-  console.log("Let sgo");
 
   // PHP
   // make request to the database to retrieve the data

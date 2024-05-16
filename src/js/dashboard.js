@@ -21,4 +21,13 @@ $(document).ready(() => {
       createHtmlCreneaux();
     }
   });
+
+  $("#btn-enseignant").click(() => {
+    if (mainPage !== "enseignants") {
+      $(".content").empty();
+      $("#myModal").remove();
+      mainPage = "enseignants";
+      createHtmlEnseignant();
+    }
+  });
 });
