@@ -17,10 +17,10 @@ class Etudiant
 
     public function create($nom, $promotion, $departement, $mot_de_passe, $date_inscription)
     {
-        $nom = htmlspecialchars($nom);
-        $promotion = htmlspecialchars(strtoupper($promotion));
-        $departement = htmlspecialchars(strtoupper($departement));
-        $mot_de_passe = htmlspecialchars($mot_de_passe);
+        $nom = trim(htmlspecialchars($nom));
+        $promotion = trim(htmlspecialchars($promotion));
+        $departement = trim(htmlspecialchars(strtoupper($departement)));
+        $mot_de_passe = trim(htmlspecialchars($mot_de_passe));
         $mot_de_passe_hash = password_hash($mot_de_passe, PASSWORD_DEFAULT);
         $date_inscription = htmlspecialchars($date_inscription);
 
@@ -30,7 +30,13 @@ class Etudiant
         $stmt->bindParam(3, $departement);
         $stmt->bindParam(4, $mot_de_passe_hash);
         $stmt->bindParam(5, $date_inscription);
-        return $stmt->execute();
+        $result = $stmt->execute();
+        if (!$result) {
+            $msg = "Erreur lors de l'insertion";
+        } else {
+            $msg = "Inséré avec succès";
+        }
+        return $msg;
     }
 
     public function read($id_etudiant = null)
@@ -49,23 +55,6 @@ class Etudiant
             }
             return $data;
         }
-    }
-
-    public function update($id_etudiant, $nom, $promotion, $departement, $mot_de_passe, $date_inscription)
-    {
-        $id_etudiant = filter_var($id_etudiant, FILTER_SANITIZE_NUMBER_INT);
-        $nom = filter_var($nom, FILTER_SANITIZE_STRING);
-        $promotion = filter_var($promotion, FILTER_SANITIZE_NUMBER_INT);
-        $departement = filter_var($departement, FILTER_SANITIZE_STRING);
-        $mot_de_passe = filter_var($mot_de_passe, FILTER_SANITIZE_STRING);
-        $date_inscription = filter_var($date_inscription, FILTER_SANITIZE_STRING);
-
-        if (!is_numeric($id_etudiant) || !is_string($nom) || !is_numeric($promotion) || !is_string($departement) || !is_string($mot_de_passe) || !is_string($date_inscription)) {
-            throw new InvalidArgumentException('Invalid input data');
-        }
-
-        $stmt = $this->db->prepare("UPDATE etudiants SET nom = ?, promotion = ?, departement = ?, mot_de_passe = ?, date_inscription = ? WHERE id_etudiant = ?");
-        return $stmt->execute([$nom, $promotion, $departement, $mot_de_passe, $date_inscription, $id_etudiant]);
     }
 
     public function delete($id_etudiant)
@@ -98,8 +87,8 @@ switch ($_SERVER['REQUEST_METHOD']) {
         $departement = $data['departement'];
         $mot_de_passe = $data['mot_de_passe'];
         $date_inscription = $data['date_inscription'];
-        $id = $etudiant->create($nom, $promotion, $departement, $mot_de_passe, $date_inscription);
-        echo json_encode($id);
+        $msg = $etudiant->create($nom, $promotion, $departement, $mot_de_passe, $date_inscription);
+        echo json_encode($msg);
         break;
     case 'GET':
         if (isset($_GET['to_delete']) && !empty($_GET['to_delete'])) {
@@ -108,11 +97,6 @@ switch ($_SERVER['REQUEST_METHOD']) {
             $id = isset($_GET['id']) ? $_GET['id'] : null;
             echo json_encode($etudiant->read($id));
         }
-        break;
-    case 'PUT':
-        // NOT TESTED
-        parse_str(file_get_contents("php://input"), $post_vars);
-        echo json_encode(['success' => $etudiant->update($post_vars['id_etudiant'], $post_vars['nom'], $post_vars['promotion'], $post_vars['departement'], $post_vars['mot_de_passe'], $post_vars['date_inscription'])]);
         break;
     default:
         exit;

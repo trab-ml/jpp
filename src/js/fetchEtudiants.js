@@ -16,18 +16,12 @@ $(document).ready(async () => {
         }
 
         etudiants = await response.json();
-        if (!etudiants) {
-            throw new Error('etudiants is not defined');
-        }
-
         createHtmlEtudiant(etudiants);
+
         $("#btn-etudiant").click(() => {
-            if (mainPage !== "etudiants") {
-                $(".content").empty();
-                $("#myModal").remove();
-                mainPage = "etudiants";
-                createHtmlEtudiant(etudiants);
-            }
+            $(".content").empty();
+            $("#createCreneauModal").remove();
+            createHtmlEtudiant(etudiants);
         });
     } catch (error) {
         console.error('Fetch error:', error);
@@ -64,7 +58,7 @@ const createHtmlEtudiant = (etudiants) => {
         "<button type='button' class='add-btn'>Ajouter un etudiant</button>"
     );
 
-    $("body").append(`<div id="myModal" class="modal">
+    $("body").append(`<div id="createStudentModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
             <form id="studentForm">
@@ -72,7 +66,7 @@ const createHtmlEtudiant = (etudiants) => {
                 <input type="text" id="name" name="name" autocomplete="off"><br>
 
                 <label for="promotion">Promotion:</label><br>
-                <input type="text" id="promotion" name="promotion"><br>
+                <input type="text" id="studentForm__promotion" name="promotion"><br>
 
                 <label for="departement">Departement:</label><br>
                 <input type="text" id="departement" name="departement"><br>
@@ -87,7 +81,7 @@ const createHtmlEtudiant = (etudiants) => {
         </div>
     </div>`);
 
-    const modal = document.getElementById("myModal");
+    const modal = document.getElementById("createStudentModal");
     const btn = document.getElementsByClassName("add-btn")[0];
     const span = document.getElementsByClassName("close")[0];
 
@@ -126,17 +120,11 @@ const createHtmlEtudiant = (etudiants) => {
             },
             body: JSON.stringify(data)
         })
-        .then(response => response.json())
-        .then(data => console.log(data))
-        .catch((error) => {
-            console.error('Error:', error);
-        });
-
-        $("#name").val("");
-        $("#departement").val("");
-        $("#promotion").val("");
-        $("#password").val("");
-        $("#date-inscription").val("");
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch((error) => {
+                console.error('Error:', error);
+            });
 
         modal.style.display = "none";
         window.location.reload();

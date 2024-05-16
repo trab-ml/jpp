@@ -17,10 +17,8 @@ require_once './check_auth.php';
     <title>Dashboard</title>
     <link rel="stylesheet" href="../style/dashboardStyle.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script>
-        let mainPage = "etudiants";
-    </script>
     <script src="../js/fetchEtudiants.js"></script>
+    <script src="../js/fetchCreneaux.js"></script>
 </head>
 
 <body>

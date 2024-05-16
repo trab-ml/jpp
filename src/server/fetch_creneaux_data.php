@@ -8,7 +8,8 @@ require_once 'config_database.php';
 
 $users = ["etudiant" => "etudiants", "enseignant" => "enseignants", "admin" => "administratifs"];
 $table_cible = $users[$_SESSION['statut']];
-$data_cible = "creneaux.matiere AS matiere,
+$data_cible = "creneaux.id_creneau AS id,
+    creneaux.matiere AS matiere,
     creneaux.enseignant AS enseignant,
     creneaux.salle AS salle,
     creneaux.promotion AS promotion,

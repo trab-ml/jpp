@@ -135,7 +135,9 @@ Given that profile infos are available in session vars, they are directly displa
 
 ### TODO
 
-- Admin dashboard
-  - CR_D etudiants (etudiants.js) (Pascal Poireau pp24! math) (Jean Poivron jp23! info) (Pierre Desbois pd24* svt) (Jean Baptiste Perrin jbp70* svt)
-  - **CR_D** creneaux
-  - CR_D enseignants
+- etudiants
+  - (Pascal Poireau pp24! math)
+  - (Jean Poivron jp23! info) (Pierre Desbois pd24* svt)
+  - (Jean Baptiste Perrin jbp70* svt)
+- Click n'importe où hors du modal pour fermmer ce dernier (l'icon pour fermer n'est pas fonctionnelle)
+- Bug: des fois, au click sur etudiants ou creneaux, le basculement n'est immédiat.
